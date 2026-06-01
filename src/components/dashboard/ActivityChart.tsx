@@ -20,7 +20,7 @@ export function ActivityChart({ data }: { data: Activity[] }) {
       </div>
       
       <div className="flex-1 min-h-[200px] w-full mt-auto">
-        <ResponsiveContainer width="100%" height="100%">
+        <ResponsiveContainer width="100%" height="100%" minHeight={200} minWidth={0}>
           <BarChart data={chartData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
             <XAxis 
