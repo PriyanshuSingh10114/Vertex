@@ -48,8 +48,8 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <header className="mb-8">
-        <h1 className="text-2xl font-bold text-white">Dashboard</h1>
-        <p className="text-slate-400 text-sm mt-1">Track your progress and activity.</p>
+        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <p className="text-card-muted text-sm mt-1">Track your progress and activity.</p>
       </header>
 
       <BentoGrid>

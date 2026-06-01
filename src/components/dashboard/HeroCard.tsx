@@ -35,13 +35,13 @@ const childVariants = {
 
 export function HeroCard({ greeting, description, badgeText, actions, className }: HeroCardProps) {
   return (
-    <Card className={cn("p-6 sm:p-8 flex flex-col justify-between h-full relative overflow-hidden group/hero", className)}>
-      {/* Subtle radial mesh gradient */}
-      <div 
-        className="absolute top-[-50%] right-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] rounded-full bg-white/[0.02] blur-3xl pointer-events-none transition-opacity duration-500 group-hover/hero:bg-white/[0.04]" 
-        aria-hidden="true" 
-      />
-      
+    <Card 
+      className={cn(
+        "p-6 sm:p-8 flex flex-col justify-between h-full relative overflow-hidden group/hero",
+        "bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white/[0.04] via-transparent to-transparent",
+        className
+      )}
+    >
       <motion.div 
         className="relative z-10"
         variants={containerVariants}

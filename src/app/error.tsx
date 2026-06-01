@@ -17,12 +17,12 @@ export default function ErrorBoundary({
   return (
     <div className="flex h-[50vh] flex-col items-center justify-center space-y-4 rounded-xl border border-red-500/20 bg-red-500/10 p-8 text-center">
       <h2 className="text-xl font-bold text-red-400">Something went wrong!</h2>
-      <p className="text-sm text-slate-300">
+      <p className="text-sm text-card-muted">
         Failed to load dashboard data. Please check your connection and try again.
       </p>
       <button
         onClick={() => reset()}
-        className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
+        className="rounded-lg bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
       >
         Try again
       </button>
