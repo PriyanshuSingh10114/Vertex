@@ -10,12 +10,7 @@ export function CourseCard({ course, index }: { course: Course; index: number })
   const isCompleted = course.status === 'Completed';
   
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: index * 0.05 }}
-      className="h-full"
-    >
+    <div className="h-full">
       <Card className="h-full flex flex-col p-5 group cursor-pointer">
         <div className="flex justify-between items-start mb-4">
           <div className="p-2 bg-white/[0.03] rounded-md border border-white/5 group-hover:border-border-hover transition-colors">
@@ -49,17 +44,17 @@ export function CourseCard({ course, index }: { course: Course; index: number })
             <div className="h-1 bg-border rounded-full overflow-hidden">
               <motion.div 
                 className={cn(
-                  "h-full rounded-full",
+                  "h-full rounded-full w-full origin-left",
                   isCompleted ? "bg-card-muted" : "bg-accent"
                 )}
-                initial={{ width: 0 }}
-                animate={{ width: `${course.progress}%` }}
-                transition={{ duration: 0.8, delay: 0.2 + (index * 0.1), ease: "easeOut" }}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: course.progress / 100 }}
+                transition={{ type: "spring", stiffness: 50, damping: 15, mass: 1 }}
               />
             </div>
           </div>
         </div>
       </Card>
-    </motion.div>
+    </div>
   );
 }

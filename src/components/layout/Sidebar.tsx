@@ -44,9 +44,9 @@ export function Sidebar() {
                 {isActive && (
                   <motion.div
                     layoutId="sidebar-active"
-                    className="absolute inset-0 rounded-xl bg-blue-500/10 border border-blue-500/20"
+                    className="absolute inset-0 rounded-xl bg-white/[0.04] border border-white/[0.08]"
                     initial={false}
-                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
                 <Icon className="relative z-10 h-5 w-5" />
@@ -56,10 +56,10 @@ export function Sidebar() {
           })}
         </nav>
         
-        <div className="mt-auto rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 p-4 shadow-lg">
-          <h4 className="font-semibold text-white">Pro Plan</h4>
-          <p className="mt-1 text-xs text-indigo-100">Unlock premium courses and advanced analytics.</p>
-          <button className="mt-3 w-full rounded-lg bg-white/20 py-2 text-xs font-medium text-white hover:bg-white/30 transition-colors">
+        <div className="mt-auto rounded-xl bg-card border border-border p-4">
+          <h4 className="text-[13px] font-medium text-foreground">Pro Plan</h4>
+          <p className="mt-1 text-[12px] text-card-muted leading-relaxed">Unlock premium courses and advanced analytics.</p>
+          <button className="mt-4 w-full rounded-md bg-foreground py-2 text-xs font-medium text-background hover:bg-foreground/90 transition-colors">
             Upgrade Now
           </button>
         </div>
