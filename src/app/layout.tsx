@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { BottomNavigation } from '@/components/layout/BottomNavigation';
 import { cn } from '@/lib/utils';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -21,11 +22,12 @@ export default function RootLayout({
       <body className={cn(inter.variable, 'min-h-screen selection:bg-accent/30')}>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
-          <main className="flex-1 overflow-y-auto pl-0 sm:pl-64">
-            <div className="mx-auto max-w-7xl p-4 sm:p-8">
+          <main className="flex-1 overflow-y-auto pl-0 md:pl-64 pb-20 md:pb-0">
+            <div className="mx-auto max-w-7xl p-4 md:p-6 lg:p-8">
               {children}
             </div>
           </main>
+          <BottomNavigation />
         </div>
       </body>
     </html>
