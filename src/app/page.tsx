@@ -54,7 +54,15 @@ export default async function DashboardPage() {
 
       <BentoGrid>
         <BentoGridItem className="col-span-1 md:col-span-2 lg:col-span-3">
-          <HeroCard user={user} />
+          <HeroCard 
+            greeting={`Welcome back, ${user.name}.`}
+            description="You've logged 12 hours this week. Keep up the momentum to reach your monthly milestone by Friday."
+            badgeText="Top 5% Learner"
+            actions={[
+              { label: 'Resume Learning', primary: true, href: '/courses' },
+              { label: 'View Path', primary: false, href: '/path' }
+            ]}
+          />
         </BentoGridItem>
 
         <BentoGridItem className="col-span-1 lg:col-span-1">
