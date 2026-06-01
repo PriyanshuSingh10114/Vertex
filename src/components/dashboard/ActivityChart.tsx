@@ -2,17 +2,10 @@
 
 import { Card } from '@/components/ui/Card';
 import { Activity } from '@/types';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
-import { useState, useEffect } from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { ChartWrapper } from '@/components/ui/ChartWrapper';
 
 export function ActivityChart({ data }: { data: Activity[] }) {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMounted(true);
-  }, []);
-
   // Format data for chart
   const chartData = data.map(item => ({
     name: new Date(item.date).toLocaleDateString('en-US', { weekday: 'short' }),
@@ -27,9 +20,9 @@ export function ActivityChart({ data }: { data: Activity[] }) {
       </div>
       
       <div className="h-[200px] w-full mt-auto">
-        {isMounted && (
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={chartData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
+        <ChartWrapper>
+          {({ width, height }) => (
+            <BarChart width={width} height={height} data={chartData} margin={{ top: 0, right: 0, left: -20, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#27272a" vertical={false} />
               <XAxis 
                 dataKey="name" 
@@ -61,8 +54,8 @@ export function ActivityChart({ data }: { data: Activity[] }) {
                 animationDuration={1000}
               />
             </BarChart>
-          </ResponsiveContainer>
-        )}
+          )}
+        </ChartWrapper>
       </div>
     </Card>
   );
