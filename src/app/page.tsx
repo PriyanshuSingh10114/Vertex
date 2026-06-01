@@ -24,7 +24,7 @@ const MOCK_ACTIVITY: Activity[] = [
 ];
 
 export default async function DashboardPage() {
-  const supabase = createServerComponentClient();
+  const supabase = await createServerComponentClient();
   
   let user = MOCK_USER;
   let courses = MOCK_COURSES;
