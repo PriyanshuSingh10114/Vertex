@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Vertex Student Dashboard
 
-## Getting Started
+A modern, responsive student dashboard built as a frontend engineering internship assignment. The goal of this project was to architect a clean, maintainable, and highly performant application using modern React patterns without over-engineering the solution.
 
-First, run the development server:
+## 🛠 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** Next.js 15 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Database:** Supabase (@supabase/ssr)
+- **Icons:** Lucide React
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📐 Architecture & Design Decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Server & Client Components
+The application strictly adheres to the Next.js App Router paradigm:
+- **Server Components (Default):** Pages like `app/page.tsx` and `app/courses/page.tsx` are Server Components. They securely fetch data from Supabase without exposing credentials to the browser, significantly reducing the client JavaScript bundle.
+- **Client Components (`'use client'`):** Interactivity is pushed to the leaves of the tree. Components like `<CourseCatalog>` (which handles search state) and `<SettingsForm>` (which handles `localStorage`) are explicitly marked as Client Components.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Design System
+I implemented a strict "Dark Mode" design system inspired by tools like Vercel and Linear:
+- **CSS Variables:** All colors (`--background`, `--foreground`, `--card`, `--border`) are managed via CSS variables in `globals.css` rather than hardcoded Tailwind classes, ensuring total consistency.
+- **Bento Grid:** The layout uses a responsive CSS Grid ("Bento" style) that shifts gracefully from a single column on mobile to 4 columns on desktop.
+- **GPU Animations:** All animations (hover states, progress bars) exclusively target `transform` and `opacity` to ensure smooth 60fps performance without triggering costly browser layout recalculations.
 
-## Learn More
+### 3. Graceful Degradation
+To make the dashboard resilient:
+- If the Supabase environment variables are missing, the data-fetching layer safely falls back to high-quality **Mock Data**. This allows developers to clone and run the project immediately without needing to provision a database.
 
-To learn more about Next.js, take a look at the following resources:
+## 🚀 Setup Instructions
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd vertex
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Configure Environment (Optional):**
+   If you want to use live data, copy the template and add your Supabase credentials:
+   ```bash
+   cp .env.local.example .env.local
+   # Edit .env.local with your NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📱 Responsiveness
+- **Desktop (>1024px):** Persistent left sidebar with full Bento Grid layout.
+- **Tablet (768px-1024px):** Scaled typography and two-column grid.
+- **Mobile (<768px):** Sidebar is hidden and replaced by a mobile-optimized Bottom Navigation bar. Safe-area padding is applied to prevent overlap with OS gestures.
+
+## 🤔 Challenges Faced
+
+One notable challenge was dealing with Next.js SSR hydration when rendering charts. Because Recharts relies on DOM measurements (`getBoundingClientRect`) to size its `<ResponsiveContainer>`, it would throw `-1` dimension errors during the server render phase. I solved this by implementing an `isMounted` hook to strictly defer the chart rendering to the client, entirely eliminating the hydration warnings while maintaining layout stability.

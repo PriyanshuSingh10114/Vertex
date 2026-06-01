@@ -14,6 +14,7 @@ export function SettingsForm() {
     const savedEmail = localStorage.getItem('settings_email');
     const savedMarketing = localStorage.getItem('settings_marketing');
     
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (savedEmail !== null) setEmailNotifications(savedEmail === 'true');
     if (savedMarketing !== null) setMarketingEmails(savedMarketing === 'true');
   }, []);

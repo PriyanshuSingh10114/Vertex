@@ -15,9 +15,9 @@ export function CourseList({ courses }: { courses: Course[] }) {
 
   return (
     <>
-      {courses.map((course, index) => (
+      {courses.map((course) => (
         <BentoGridItem key={course.id} className="col-span-1">
-          <CourseCard course={course} index={index} />
+          <CourseCard course={course} />
         </BentoGridItem>
       ))}
     </>

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { PlayCircle, CheckCircle2, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export function CourseCard({ course, index }: { course: Course; index: number }) {
+export function CourseCard({ course }: { course: Course }) {
   const isCompleted = course.status === 'Completed';
   
   return (

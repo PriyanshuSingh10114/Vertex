@@ -59,7 +59,7 @@ export default function ActivityPage() {
           <Card className="p-6 h-full">
             <h3 className="text-[16px] font-medium text-foreground mb-4">Weekly Summary</h3>
             <p className="text-sm text-card-muted mb-4">
-              You've studied 3 hours more than last week. Your primary focus was the Next.js App Router course.
+              You&apos;ve studied 3 hours more than last week. Your primary focus was the Next.js App Router course.
             </p>
             <div className="flex items-center space-x-2 text-sm text-accent">
               <div className="w-2 h-2 rounded-full bg-accent" />

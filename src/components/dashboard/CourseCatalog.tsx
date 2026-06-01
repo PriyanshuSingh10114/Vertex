@@ -56,9 +56,9 @@ export function CourseCatalog({ courses }: { courses: Course[] }) {
       {/* Results Grid */}
       {filteredCourses.length > 0 ? (
         <BentoGrid>
-          {filteredCourses.map((course, index) => (
+          {filteredCourses.map((course) => (
             <BentoGridItem key={course.id} className="col-span-1 md:col-span-1">
-              <CourseCard course={course} index={index} />
+              <CourseCard course={course} />
             </BentoGridItem>
           ))}
         </BentoGrid>

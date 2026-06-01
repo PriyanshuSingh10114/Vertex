@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 import { Home, BookOpen, BarChart2, Settings, User } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 
 const navItems = [
   { icon: Home, label: 'Dashboard', href: '/' },
@@ -18,13 +17,13 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden md:flex fixed left-0 top-0 z-40 h-screen w-64 flex-col border-r border-white/10 bg-slate-950/80 backdrop-blur-xl">
+    <aside className="hidden md:flex fixed left-0 top-0 z-40 h-screen w-64 flex-col border-r border-border bg-background/80 backdrop-blur-xl">
       <div className="flex h-full flex-col px-4 py-8">
         <div className="mb-10 flex items-center gap-3 px-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500 shadow-lg shadow-blue-500/20">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent shadow-lg shadow-accent/20">
             <BookOpen className="text-white h-5 w-5" />
           </div>
-          <span className="text-xl font-bold tracking-tight text-white">StudentPro</span>
+          <span className="text-xl font-bold tracking-tight text-foreground">StudentPro</span>
         </div>
 
         <nav className="flex-1 space-y-2">
@@ -37,20 +36,14 @@ export function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'relative flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors',
-                  isActive ? 'text-white' : 'text-slate-400 hover:text-white hover:bg-white/5'
+                  'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors',
+                  isActive 
+                    ? 'bg-white/[0.04] border border-white/[0.08] text-foreground' 
+                    : 'text-card-muted hover:text-foreground hover:bg-white/5 border border-transparent'
                 )}
               >
-                {isActive && (
-                  <motion.div
-                    layoutId="sidebar-active"
-                    className="absolute inset-0 rounded-xl bg-white/[0.04] border border-white/[0.08]"
-                    initial={false}
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                  />
-                )}
-                <Icon className="relative z-10 h-5 w-5" />
-                <span className="relative z-10">{item.label}</span>
+                <Icon className="h-5 w-5" />
+                <span>{item.label}</span>
               </Link>
             );
           })}

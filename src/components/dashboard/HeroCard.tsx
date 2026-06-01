@@ -1,7 +1,7 @@
 'use client';
 
 import { Card } from '@/components/ui/Card';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -20,7 +20,7 @@ export interface HeroCardProps {
   className?: string;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -28,7 +28,7 @@ const containerVariants = {
   },
 };
 
-const childVariants = {
+const childVariants: Variants = {
   hidden: { opacity: 0, y: 10 },
   visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } },
 };
@@ -71,21 +71,24 @@ export function HeroCard({ greeting, description, badgeText, actions, className 
           animate="visible"
         >
           {actions.map((action, index) => {
-            const ButtonWrapper = action.href ? Link : 'button';
+            const buttonClass = cn(
+              "px-5 py-2.5 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
+              action.primary 
+                ? "bg-foreground hover:bg-foreground/90 text-background" 
+                : "bg-transparent hover:bg-white/5 text-foreground border border-border"
+            );
+
             return (
               <motion.div key={index} variants={childVariants}>
-                <ButtonWrapper
-                  href={action.href || '#'}
-                  onClick={action.onClick}
-                  className={cn(
-                    "px-5 py-2.5 rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
-                    action.primary 
-                      ? "bg-foreground hover:bg-foreground/90 text-background" 
-                      : "bg-transparent hover:bg-white/5 text-foreground border border-border"
-                  )}
-                >
-                  {action.label}
-                </ButtonWrapper>
+                {action.href ? (
+                  <Link href={action.href} className={buttonClass}>
+                    {action.label}
+                  </Link>
+                ) : (
+                  <button onClick={action.onClick} className={buttonClass}>
+                    {action.label}
+                  </button>
+                )}
               </motion.div>
             );
           })}

@@ -24,7 +24,7 @@ const MOCK_ACTIVITY: Activity[] = [
 ];
 
 export default async function DashboardPage() {
-  let user = MOCK_USER;
+  const user = MOCK_USER;
   let courses = MOCK_COURSES;
   let activity = MOCK_ACTIVITY;
 
