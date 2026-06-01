@@ -11,51 +11,50 @@ export function CourseCard({ course, index }: { course: Course; index: number })
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3, delay: index * 0.05 }}
       className="h-full"
     >
-      <Card className="h-full flex flex-col p-5 hover:border-blue-500/30 transition-colors group">
+      <Card className="h-full flex flex-col p-5 group cursor-pointer">
         <div className="flex justify-between items-start mb-4">
-          <div className="p-2.5 bg-white/5 rounded-xl border border-white/10 group-hover:bg-blue-500/10 group-hover:border-blue-500/20 transition-colors">
+          <div className="p-2 bg-white/[0.03] rounded-md border border-white/5 group-hover:border-border-hover transition-colors">
             {isCompleted ? (
-              <CheckCircle2 className="w-5 h-5 text-green-400" />
+              <CheckCircle2 className="w-4 h-4 text-card-muted" />
             ) : course.status === 'In Progress' ? (
-              <PlayCircle className="w-5 h-5 text-blue-400" />
+              <PlayCircle className="w-4 h-4 text-accent" />
             ) : (
-              <Clock className="w-5 h-5 text-slate-400" />
+              <Clock className="w-4 h-4 text-card-muted" />
             )}
           </div>
           <span className={cn(
-            "text-xs font-medium px-2.5 py-1 rounded-full border",
-            isCompleted ? "bg-green-500/10 text-green-400 border-green-500/20" :
-            course.status === 'In Progress' ? "bg-blue-500/10 text-blue-400 border-blue-500/20" :
-            "bg-slate-500/10 text-slate-400 border-slate-500/20"
+            "text-[11px] font-medium px-2 py-0.5 rounded-md border uppercase tracking-wider",
+            isCompleted ? "bg-white/[0.02] text-card-muted border-border" :
+            course.status === 'In Progress' ? "bg-accent/10 text-accent border-accent/20" :
+            "bg-white/[0.02] text-card-muted border-border"
           )}>
             {course.status}
           </span>
         </div>
 
         <div className="mt-auto">
-          <h3 className="text-lg font-semibold text-white mb-1 line-clamp-2">{course.title}</h3>
-          <p className="text-sm text-slate-400 mb-4">{course.instructor}</p>
+          <h3 className="text-sm font-medium text-foreground mb-1 line-clamp-2">{course.title}</h3>
+          <p className="text-[13px] text-card-muted mb-4">{course.instructor}</p>
           
           <div className="space-y-2">
-            <div className="flex justify-between text-xs font-medium">
-              <span className="text-slate-300">Progress</span>
-              <span className="text-white">{course.progress}%</span>
+            <div className="flex justify-between text-[11px] font-medium tracking-wide">
+              <span className="text-card-muted uppercase">Progress</span>
+              <span className="text-foreground">{course.progress}%</span>
             </div>
-            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-1 bg-border rounded-full overflow-hidden">
               <motion.div 
                 className={cn(
                   "h-full rounded-full",
-                  isCompleted ? "bg-green-500" : "bg-blue-500"
+                  isCompleted ? "bg-card-muted" : "bg-accent"
                 )}
                 initial={{ width: 0 }}
                 animate={{ width: `${course.progress}%` }}
-                transition={{ duration: 1, delay: 0.5 + (index * 0.1) }}
+                transition={{ duration: 0.8, delay: 0.2 + (index * 0.1), ease: "easeOut" }}
               />
             </div>
           </div>

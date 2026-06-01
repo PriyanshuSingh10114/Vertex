@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={cn(inter.className, 'min-h-screen bg-slate-950 text-slate-50 selection:bg-blue-500/30')}>
+      <body className={cn(inter.variable, 'min-h-screen selection:bg-accent/30')}>
         <div className="flex h-screen overflow-hidden">
           <Sidebar />
           <main className="flex-1 overflow-y-auto pl-0 sm:pl-64">
