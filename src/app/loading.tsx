@@ -1,29 +1,26 @@
-import { BentoGrid, BentoGridItem } from '@/components/dashboard/BentoGrid';
-import { Card } from '@/components/ui/Card';
-
 export default function Loading() {
   return (
     <div className="space-y-6 animate-pulse">
       <div className="h-8 w-48 bg-card border border-border rounded-lg"></div>
       
-      <BentoGrid>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {/* Hero Card Skeleton */}
-        <BentoGridItem className="col-span-1 md:col-span-2 lg:col-span-3">
-          <Card className="p-8 h-64 bg-card" />
-        </BentoGridItem>
+        <div className="col-span-1 md:col-span-2 lg:col-span-3">
+          <div className="rounded-xl border border-border bg-card p-8 h-64" />
+        </div>
 
         {/* Activity Chart Skeleton */}
-        <BentoGridItem className="col-span-1 lg:col-span-1">
-          <Card className="p-6 h-64 bg-card" />
-        </BentoGridItem>
+        <div className="col-span-1 lg:col-span-1">
+          <div className="rounded-xl border border-border bg-card p-6 h-64" />
+        </div>
 
         {/* Course List Skeletons */}
         {[1, 2, 3, 4].map((i) => (
-          <BentoGridItem key={i} className="col-span-1">
-            <Card className="p-5 h-48 bg-card" />
-          </BentoGridItem>
+          <div key={i} className="col-span-1">
+            <div className="rounded-xl border border-border bg-card p-5 h-48" />
+          </div>
         ))}
-      </BentoGrid>
+      </div>
     </div>
   );
 }
