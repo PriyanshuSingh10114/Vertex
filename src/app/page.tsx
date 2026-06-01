@@ -24,15 +24,15 @@ const MOCK_ACTIVITY: Activity[] = [
 ];
 
 export default async function DashboardPage() {
-  const supabase = await createServerComponentClient();
-  
   let user = MOCK_USER;
   let courses = MOCK_COURSES;
   let activity = MOCK_ACTIVITY;
 
   try {
     // Attempt to fetch from Supabase if env vars are present
-    if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
+    if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      const supabase = await createServerComponentClient();
+      
       const [coursesRes, activityRes] = await Promise.all([
         supabase.from('courses').select('*').order('created_at', { ascending: false }),
         supabase.from('activity').select('*').order('date', { ascending: true })
